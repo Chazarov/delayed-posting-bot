@@ -2,22 +2,21 @@ from aiogram import types
 from aiogram.types import InlineKeyboardButton as IB
 from aiogram import F, types, Router, Dispatcher, Bot
 
-from app.bot.helper import keyboard
+from app.bot.helper import keyboard, button
 
 router = Router()
 
 
-@router.message(F.text == "/start")
-async def h(message: types.Message):
-    await message.answer(text = \
+async def h(message: types.Message, **kwards:str):
+    return await message.answer(text = \
 """
 СОЗДАНИЕ ПОСТА
 Выберите канал, в котором хотите создать публикацию.
 """,
         reply_markup=keyboard(
             [
-                [IB(text="Добавленый канал", callback_data="")]
-                [IB(text="+ Добавить канал", callback_data="")]
+                [button("Добавленый канал", "")]
+                [button("+ Добавить канал", "")]
             ]
         )
     )
